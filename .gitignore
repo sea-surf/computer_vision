@@ -1,0 +1,15 @@
+# Models
+#*.pt
+#*.onnx
+#.engine
+
+# Data
+*.zip
+*.mp4
+*.avi
+
+# Virtual Environment
+.venv
+uv.lock
+.python-version
+pyproject.toml
