@@ -16,22 +16,15 @@ Research of fire and smoke detection at the Computer Vision Laboratory of the Fe
 
 | Original | Output |
 | --- | --- |
-| ![original](models/fire_smoke_box/fire_smoke_box-detections/urban_fire_0_original.jpg) | ![output](models/fire_smoke_box/fire_smoke_box-detections/urban_fire_0.jpg) |
-| ![original](models/fire_smoke_box/fire_smoke_box-detections/urban_fire_1_original.jpg) | ![output](models/fire_smoke_box/fire_smoke_box-detections/urban_fire_1.jpg) |
-| ![original](models/fire_smoke_box/fire_smoke_box-detections/urban_fire_2_original.jpg) | ![output](models/fire_smoke_box/fire_smoke_box-detections/urban_fire_2.jpg) |
-
-| Original | Output |
-| --- | --- |
-| ![original](models/fire_smoke_box/fire_smoke_box-detections/notredame3_original.gif) | ![output](models/fire_smoke_box/fire_smoke_box-detections/notredame3.gif) |
-| ![original](models/fire_smoke_box/fire_smoke_box-detections/wildfire_videos_1_original.gif) | ![output](models/fire_smoke_box/fire_smoke_box-detections/wildfire_videos_1.gif) |
-| ![original](models/fire_smoke_box/fire_smoke_box-detections/wildfire_videos_2_original.gif) | ![output](models/fire_smoke_box/fire_smoke_box-detections/wildfire_videos_2.gif) |
-| ![original](models/fire_smoke_box/fire_smoke_box-detections/wildfire_videos_3_original.gif) | ![output](models/fire_smoke_box/fire_smoke_box-detections/wildfire_videos_3.gif) |
+| ![original](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_0_original.jpg) | ![output](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_0.jpg) |
+| ![original](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_1_original.jpg) | ![output](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_1.jpg) |
+| ![original](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_2_original.jpg) | ![output](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_2.jpg) |
 
 ## RT-DETR
 
 >model: rtdetr | epochs: 40 | gpu: rtx 5090
 
-![output](predict/fire_rtdetr/fire_rtdetr.png)
+![output](predict/fire_rtdetr/wildfire_test.gif)
 
 
 ## Articles

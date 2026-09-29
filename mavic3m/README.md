@@ -1,6 +1,6 @@
 # Mavic 3M Real-time Video Streaming
 
-Este projeto configura um servidor de vídeo e roda um script Python para processar o fluxo ao vivo (RTMP) do DJI Mavic 3M usando YOLO (Ultralytics) e OpenCV.
+Este documento descreve como configurar um servidor de vídeo para processar o video real-time (RTMP) do DJI Mavic 3M com YOLO/DETR e OpenCV.
 
 ## 1. Instalar e rodar o Servidor de Vídeo (MediaMTX)
 
