@@ -4,25 +4,20 @@
 
 Research of fire and smoke detection at the Computer Vision Laboratory of the Federal University of Santa Catarina (UFSC).
 
->model: https://huggingface.co/seawsurf/fire_smoke_detection_box
-
->dataset: https://huggingface.co/datasets/seawsurf/fire_smoke_dataset_fasdd_cv
-
 ## Detections
 
-## YOLO
+### YOLO
 
 >model: yolo26n.pt | best map50 (box): 0.772 | dataset: fasdd_cv [article 1] [total:95k, fire(only):12.5k, smoke(only):23.3k, fire+smoke:20.1k, null:39.1k]
 
 | Original | Output |
 | --- | --- |
-| ![original](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_0_original.jpg) | ![output](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_0.jpg) |
-| ![original](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_1_original.jpg) | ![output](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_1.jpg) |
-| ![original](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_2_original.jpg) | ![output](models/fire_yolo26n/fire_smoke_box-detections/urban_fire_2.jpg) |
+| ![original](models/fire_yolo26n/fire_yolo26n-detections/urban_fire_0_original.jpg) | ![output](models/fire_yolo26n/fire_yolo26n-detections/urban_fire_0.jpg) |
+| ![original](models/fire_yolo26n/fire_yolo26n-detections/urban_fire_2_original.jpg) | ![output](models/fire_yolo26n/fire_yolo26n-detections/urban_fire_2.jpg) |
 
-## RT-DETR
+### RT-DETR
 
->model: rtdetr | epochs: 40 | gpu: rtx 5090
+>model: rtdetr | epochs: 40 | gpu: rtx 5090 | platform: jetson orin
 
 ![output](predict/fire_rtdetr/wildfire_test.gif)
 
@@ -62,6 +57,10 @@ yolo export model=models/fire_rtdetr.pt format=engine half=True
 ```
 
 ### Save model and dataset
+
+>model: https://huggingface.co/seawsurf/fire_rtdetr
+
+>dataset: https://huggingface.co/datasets/seawsurf/fire_smoke_dataset_fasdd_cv
 
 ```python
 # uv venv
