@@ -3,26 +3,43 @@ import time
 from ultralytics import YOLO
 from ultralytics import RTDETR
 from pathlib import Path
+import numpy as np 
 
 ROOT = Path(__file__).parent.parent
 
-model_path = ROOT / "models" / "fire_yolo26n.engine"
-predict_dir = ROOT / "predict" / "fire_yolo26n"
-model = YOLO(str(model_path))
+#model_path = ROOT / "models" / "fire_yolo26n.engine"
+#predict_dir = ROOT / "predict" / "fire_yolo26n"
+#model = YOLO(str(model_path))
 
-# model_path = ROOT / "models" / "fire_rtdetr.engine"
-# predict_dir = ROOT / "predict" / "fire_rtdetr"
-# model = RTDETR(str(model_path))
+model_path = ROOT / "models" / "fire_rtdetr.engine"
+predict_dir = ROOT / "predict" / "fire_rtdetr"
+model = RTDETR(str(model_path))
 
 target_folder = ROOT / "dataset" / "test"
 predict_dir.mkdir(parents=True, exist_ok=True)
 
 CLASS_NAMES = ["fire", "smoke"]
 
+FIRE_ID = 0
+SMOKE_ID = 1
+
 COLORS = {
     0: (0, 0, 255),
     1: (255, 0, 0)
 }
+
+def filter_by_priority(boxes, scores, class_ids, fire_id=0, smoke_id=1):
+    """
+    Keep only fire detections if any fire is found.
+    Otherwise, keep only smoke detections.
+    """
+    if len(class_ids) == 0:
+        return boxes, scores, class_ids
+    fire_mask = (class_ids == fire_id)
+    if np.any(fire_mask):
+        return boxes[fire_mask], scores[fire_mask], class_ids[fire_mask]
+    smoke_mask = (class_ids == smoke_id)
+    return boxes[smoke_mask], scores[smoke_mask], class_ids[smoke_mask]
 
 def draw_detections(frame, boxes, scores, class_ids):
     for box, score, cls_id in zip(boxes, scores, class_ids):
@@ -42,7 +59,8 @@ def draw_detections(frame, boxes, scores, class_ids):
 
 for file_path in target_folder.iterdir():
     ext = file_path.suffix.lower()
-    
+
+    # Imagens
     if ext in ['.jpg', '.jpeg', '.png']:
         output_path = predict_dir / f"{file_path.stem}_output.jpg"
         
@@ -55,10 +73,14 @@ for file_path in target_folder.iterdir():
         boxes = results[0].boxes.xyxy.cpu().numpy()
         scores = results[0].boxes.conf.cpu().numpy()
         class_ids = results[0].boxes.cls.cpu().numpy()
+
+        # Filtro nas imagens
+        boxes, scores, class_ids = filter_by_priority(boxes, scores, class_ids, FIRE_ID, SMOKE_ID)
         
         frame = draw_detections(frame, boxes, scores, class_ids)
         cv2.imwrite(str(output_path), frame)
-        
+
+    # Videos
     elif ext in ['.mp4', '.avi', '.mov', '.mkv']:
         output_path = predict_dir / f"{file_path.stem}_output.mp4"
         
@@ -72,7 +94,8 @@ for file_path in target_folder.iterdir():
         
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
         writer = cv2.VideoWriter(str(output_path), fourcc, fps_video, (width, height))
-        
+
+        # Loop videos
         while True:
             t_start = time.time()
             
@@ -84,6 +107,9 @@ for file_path in target_folder.iterdir():
             boxes = results[0].boxes.xyxy.cpu().numpy()
             scores = results[0].boxes.conf.cpu().numpy()
             class_ids = results[0].boxes.cls.cpu().numpy()
+
+           # Filtro nos videos 
+            boxes, scores, class_ids = filter_by_priority(boxes, scores, class_ids, FIRE_ID, SMOKE_ID)
             
             frame = draw_detections(frame, boxes, scores, class_ids)
             

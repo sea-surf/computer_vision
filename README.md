@@ -19,7 +19,7 @@ Research of fire and smoke detection at the Computer Vision Laboratory of the Fe
 
 >model: rtdetr | epochs: 40 | gpu: rtx 5090 | platform: jetson orin
 
-![output](predict/fire_rtdetr/wildfire_test.gif)
+![output](predict/fire_rtdetr/predict/wildfire_test.gif)
 
 
 ## Articles
@@ -31,6 +31,10 @@ Research of fire and smoke detection at the Computer Vision Laboratory of the Fe
 Zoe Depth
 
 >[document](articles/zoe_depth.pdf)
+
+## Drone: Telemetry
+
+>[wildbridge](https://github.com/WildDrone/WildBridge)
 
 ## Notes
 
@@ -91,7 +95,7 @@ upload_folder(
 
 ### Convert videos to gif
 ```bash
-FOR %a IN (*.mp4 *.avi) DO ffmpeg -i "video.mp4 or %a" -f segment -segment_time 25 -vf "fps=25,scale='min(720,iw)':-1:flags=lanczos" -loop 0 "%~na_%00d.gif
+FOR %a IN (*.mp4 *.avi) DO ffmpeg -i "%a" -f segment -segment_time 25 -vf "fps=25,scale='min(720,iw)':-1:flags=lanczos" -loop 0 "%~na_%00d.gif
 ```
 
 ---
