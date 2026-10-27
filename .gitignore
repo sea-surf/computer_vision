@@ -1,7 +1,7 @@
 # Models
-#*.pt
-#*.onnx
-#.engine
+#/models/*.pt
+/models/*.onnx
+#/models/.engine
 
 # Data
 *.zip
